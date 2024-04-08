@@ -6,31 +6,110 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
-
-    }
+        
+      if (profile.active) {    
+      if (reason) {
+            profile.active = false;
+            profile.reason = reason;
+            return profile;
+          } else {
+            return "confirm status manually" 
+          } 
+        } else {
+            profile.active = true
+            delete profile.reason
+            return profile
+          }
+          
+        }
+   
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
 
+      if (x < 1 || x > 3 || y < 1 || y > 3) {
+        return "invalid coordinates"
+      }
+        let result
+      
+      for (let i = 0; i < grid.length; i++) {
+        let foundy = grid[i]
+        for (let j = 0; j < foundy.length; j++) {
+          let foundx = foundy[j]
+          if (i + 1 === y && j + 1 === x) {
+         result = foundx     
+          } 
+        }
+  
+      }
+      if (result === "🟥") {
+        return "🟥 💀"
+      } else {
+        return "🟦 🥳"
+      }
+      
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      for (let idx in obj) {
+         if (idx.length > 9) {
+          return "shorten all prop names to 9 chars or less"
+        }
+        let val = obj[idx]
+        if (val === null) {
+          delete obj[idx]
+        } else if (val === 1) {
+          obj[idx] = true
+        } else if (val === 0) {
+          obj[idx] = false
+        } 
+      }
+      return obj
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
-
+      if (text === "" || forbidden.length === 0) {
+        return text
+      }
+      let words = text.split(" ")
+      for (let idx = 0; idx < words.length; idx++) {
+        let fword = words[idx]
+        if (forbidden.includes(fword)) {
+          words[idx] = 'x'.repeat(fword.length)
+          
+        } 
+        
+      }
+      return words.join(" ")
     }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
+      const firstthree = num.slice(0,3)
+      const secondthree = num.slice(3,6)
+      const lastfour = num.slice(6)
+      return `(${firstthree}) ${secondthree}-${lastfour}` 
 
     }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
+      let rolls = 0
+      let consix = 0
+      while (true) {
+        const roll = math.floor(math.rando() * 6) + 1
+        rolls++
+        if (roll === 6) {
+          consix++
+        } else {
+          consix === 0
+        }
+        if (consix === 3) {
+          return rolls
+        }
+      }
 
     }
 
